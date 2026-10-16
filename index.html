@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadao Wellness - กลุ่มงานการแพทย์แผนไทยและการแพทย์ทางเลือก โรงพยาบาลสะเดา</title>
+    <meta name="description" content="ดูแลสุขภาพด้วยศาสตร์การแพทย์แผนไทยและการแพทย์แผนจีน โรงพยาบาลสะเดา จ.สงขลา บริการนวดไทย ประคบสมุนไพร ฝังเข็ม ครอบแก้ว ดูแลมารดาหลังคลอด อบไอน้ำสมุนไพร และสปาผิว">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6.4.0 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Prompt & Sarabun -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'Sarabun', 'sans-serif'],
+                    },
+                    colors: {
+                        wellness: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Prompt', sans-serif; background-color: #f8fafc; color: #1e293b; overflow-x: hidden; }
+        .glass-nav { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); }
+        .hero-bg {
+            background-image: url('https://lh3.googleusercontent.com/d/1qCd8i0kTdhZmLojWtHowXoXaSQcofCit');
+            background-size: cover;
+            background-position: center right;
+        }
+        @media (max-width: 768px) {
+            .hero-bg { background-position: 70% center; }
+        }
+        .receipt-dashed { border-bottom: 2px dashed #cbd5e1; }
+        .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 25px -5px rgba(15, 118, 110, 0.12), 0 8px 10px -6px rgba(15, 118, 110, 0.08); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Pulse animation for calculator badge */
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .pulse-badge { animation: subtlePulse 2.5s infinite ease-in-out; }
+    </style>
+</head>
+<body class="pb-16 md:pb-0">
+
+    <!-- ==================== 1. STICKY NAVBAR ==================== -->
+    <header class="glass-nav sticky top-0 z-50 border-b border-teal-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <img src="https://lh3.googleusercontent.com/d/1sxp0wrhV7MKhr2_6nOLQsj-jVddMmnzR" alt="Sadao Wellness Logo" class="w-12 h-12 sm:w-14 sm:h-14 object-contain drop-shadow-sm group-hover:scale-105 transition-transform">
+                    <div>
+                        <span class="text-xl sm:text-2xl font-extrabold bg-gradient-to-r from-teal-800 to-emerald-600 bg-clip-text text-transparent block leading-none">Sadao Wellness</span>
+                        <span class="text-xs sm:text-sm font-semibold text-teal-700 block mt-0.5">โรงพยาบาลสะเดา</span>
+                        <span class="text-[10px] sm:text-xs text-slate-500 hidden sm:block">กลุ่มงานการแพทย์แผนไทยและการแพทย์ทางเลือก</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-700">
+                    <a href="#home" class="text-teal-700 border-b-2 border-teal-600 pb-1">หน้าแรก</a>
+                    <a href="#services" class="hover:text-teal-600 transition-colors">บริการของเรา</a>
+                    <a href="#packages" class="hover:text-teal-600 transition-colors">แพ็กเกจแนะนำ</a>
+                    <a href="#calculator" class="text-amber-600 hover:text-amber-700 flex items-center gap-1 transition-colors font-bold">
+                        <i class="fa-solid fa-calculator"></i> ทดลองคำนวณราคา
+                    </a>
+                    <a href="#team" class="hover:text-teal-600 transition-colors">เกี่ยวกับเรา</a>
+                    <!-- ซ่อนเมนูบทความสุขภาพไว้ตามที่กำหนด -->
+                    <!-- <a href="#articles" class="hover:text-teal-600 transition-colors hidden">บทความสุขภาพ</a> -->
+                    <a href="#contact" class="hover:text-teal-600 transition-colors">ติดต่อเรา</a>
+                </nav>
+
+                <!-- Action Buttons -->
+                <div class="hidden sm:flex items-center gap-2.5">
+                    <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2 active:scale-95">
+                        <i class="fa-regular fa-calendar-check text-base"></i> จองคิวออนไลน์ <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                    <a href="https://lin.ee/ti1KjcK" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-[#06C755] hover:bg-[#05b34c] text-white flex items-center justify-center shadow-md transition-transform hover:scale-105" title="แอดไลน์ @649dqeft">
+                        <i class="fa-brands fa-line text-xl"></i>
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex items-center gap-2 lg:hidden">
+                    <a href="#calculator" class="bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1 sm:hidden">
+                        <i class="fa-solid fa-basket-shopping"></i> คำนวณงบ
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="p-2.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-teal-50 hover:text-teal-700 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl" id="mobile-menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-5 space-y-2 shadow-xl">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-bold text-teal-800 bg-teal-50">หน้าแรก</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50">บริการและอัตราค่าบริการ</a>
+            <a href="#packages" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50">แพ็กเกจแนะนำ (จับคู่ต่อเนื่อง)</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-bold text-amber-700 bg-amber-50/70"><i class="fa-solid fa-basket-shopping mr-1.5"></i> ตะกร้าทดลองคำนวณราคาตามสิทธิ</a>
+            <a href="#team" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50">ทีมบุคลากรผู้ให้บริการ</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-50">วันเวลาทำการ & ติดต่อเรา</a>
+            <div class="pt-2 flex gap-2">
+                <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="flex-1 bg-teal-600 text-white text-center py-3 rounded-xl font-bold text-sm shadow">
+                    <i class="fa-regular fa-calendar-check mr-1"></i> จองคิวออนไลน์
+                </a>
+                <a href="https://lin.ee/ti1KjcK" target="_blank" class="bg-[#06C755] text-white px-4 py-3 rounded-xl font-bold text-sm shadow flex items-center justify-center gap-1">
+                    <i class="fa-brands fa-line text-lg"></i> LINE
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. HERO SECTION ==================== -->
+    <section id="home" class="relative hero-bg min-h-[520px] lg:min-h-[600px] flex items-center border-b border-teal-100">
+        <!-- Gradient Overlay เพื่อให้อ่านตัวหนังสือชัดเจนทุกหน้าจอ -->
+        <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/20 md:from-white/95 md:via-white/75 md:to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20 relative z-10 w-full">
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 bg-teal-50/90 border border-teal-200 px-3.5 py-1.5 rounded-full text-teal-800 text-xs font-bold mb-4 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                    ชั้น 4 ตึกมรกต โรงพยาบาลสะเดา จ.สงขลา
+                </div>
+
+                <h1 class="text-3xl sm:text-5xl font-extrabold text-teal-900 leading-tight tracking-tight">
+                    ดูแลสุขภาพ...<br>
+                    <span class="bg-gradient-to-r from-teal-700 to-emerald-600 bg-clip-text text-transparent">ด้วยศาสตร์ไทยและจีน</span>
+                </h1>
+                <p class="text-lg sm:text-xl font-semibold text-teal-800 mt-2 mb-5">
+                    เพื่อสมดุลของชีวิต อย่างยั่งยืน (Sadao Wellness Clinic)
+                </p>
+
+                <!-- 3 Badges -->
+                <div class="flex flex-wrap gap-2.5 sm:gap-4 mb-7">
+                    <div class="bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-teal-100 flex items-center gap-2 text-xs sm:text-sm font-bold text-teal-800">
+                        <i class="fa-solid fa-leaf text-emerald-500 text-base"></i> ปลอดภัย มาตรฐาน รพ.
+                    </div>
+                    <div class="bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-teal-100 flex items-center gap-2 text-xs sm:text-sm font-bold text-teal-800">
+                        <i class="fa-solid fa-heart-pulse text-rose-500 text-base"></i> ใส่ใจโดยทีมแพทย์เฉพาะทาง
+                    </div>
+                    <div class="bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-sm border border-teal-100 flex items-center gap-2 text-xs sm:text-sm font-bold text-teal-800">
+                        <i class="fa-solid fa-spa text-amber-500 text-base"></i> ดูแลครบวงจร
+                    </div>
+                </div>
+
+                <!-- Hero CTA Buttons -->
+                <div class="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
+                    <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-gradient-to-r from-teal-700 to-emerald-600 hover:from-teal-800 hover:to-emerald-700 text-white px-7 py-3.5 rounded-full font-bold text-base shadow-lg hover:shadow-xl transition-all flex items-center gap-2.5 active:scale-95">
+                        <i class="fa-regular fa-calendar-check text-lg"></i> จองคิวออนไลน์ <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="https://lin.ee/ti1KjcK" target="_blank" rel="noopener" class="bg-white hover:bg-teal-50 text-teal-800 border-2 border-teal-600 px-6 py-3 rounded-full font-bold text-base shadow-sm transition-all flex items-center gap-2 active:scale-95">
+                        <i class="fa-brands fa-line text-[#06C755] text-xl"></i> ติดต่อผ่าน LINE
+                    </a>
+                    <a href="https://youtu.be/_nQcj7w2pPQ?si=hEc1x67eOvJj1h7w" target="_blank" rel="noopener" class="bg-white/80 hover:bg-white text-slate-700 border border-slate-300 px-5 py-3 rounded-full font-semibold text-sm shadow-sm transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-red-600 text-lg"></i> วิดีโอแนะนำบริการ
+                    </a>
+                </div>
+
+                <!-- Quick Phone Bar -->
+                <div class="inline-flex flex-wrap items-center gap-x-5 gap-y-2 bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-teal-100 shadow-sm text-xs sm:text-sm">
+                    <a href="tel:0842671735" class="font-extrabold text-teal-900 hover:text-teal-600 flex items-center gap-2">
+                        <span class="w-7 h-7 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs"><i class="fa-solid fa-phone"></i></span>
+                        โทร. 08 4267 1735
+                    </a>
+                    <span class="text-slate-300 hidden sm:inline">|</span>
+                    <a href="tel:074379994" class="font-semibold text-slate-600 hover:text-teal-700">
+                        0 7437 9994 ต่อ 410 (ในเวลาราชการ)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. 4 CORE PILLARS (ภาพรวม 4 หมวดบริการหลัก) ==================== -->
+    <section class="py-12 lg:py-16 bg-gradient-to-b from-teal-50/50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-teal-900">บริการของเรา</h2>
+                <p class="text-sm sm:text-base text-slate-600 mt-2">ครอบคลุมทั้งการแพทย์แผนไทย การแพทย์แผนจีน มารดาหลังคลอด และสปาเพื่อสุขภาพ</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pillar 1: แพทย์แผนไทย -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col card-hover">
+                    <div class="h-44 relative overflow-hidden">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%84%E0%B8%9A.png?raw=true" alt="แพทย์แผนไทย" class="w-full h-full object-cover">
+                        <div class="absolute -bottom-6 left-5 w-14 h-14 rounded-2xl bg-white shadow-md border border-emerald-100 flex items-center justify-center p-2">
+                            <img src="https://lh3.googleusercontent.com/d/1k-FNSpmwRok820gKcjIPkPwf-mwDljXM" alt="Icon TTM" class="w-full h-full object-contain">
+                        </div>
+                    </div>
+                    <div class="p-5 pt-8 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-teal-900">แพทย์แผนไทย</h3>
+                        <p class="text-xs text-slate-500 mt-1 flex-1">นวดไทย ประคบสมุนไพรเพื่อการรักษา นวดตัวและนวดเท้าส่งเสริมสุขภาพ</p>
+                        <div class="mt-4 bg-emerald-50/80 border border-emerald-100 rounded-xl px-3 py-2 flex items-center justify-between">
+                            <span class="text-[11px] font-semibold text-slate-600">ตามสิทธิการรักษา</span>
+                            <span class="text-sm font-extrabold text-emerald-800">0 – 250 บาท</span>
+                        </div>
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <button onclick="filterAndScroll('ttm')" class="text-xs font-bold text-teal-700 bg-teal-50 hover:bg-teal-100 py-2.5 rounded-xl transition-colors">ดูเรตราคา</button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 py-2.5 rounded-xl text-center transition-colors">จองคิว <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: แพทย์แผนจีน -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col card-hover">
+                    <div class="h-44 relative overflow-hidden">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%9D%E0%B8%B1%E0%B8%87%E0%B9%80%E0%B8%82%E0%B9%87%E0%B8%A1.png?raw=true" alt="แพทย์แผนจีน" class="w-full h-full object-cover">
+                        <div class="absolute -bottom-6 left-5 w-14 h-14 rounded-2xl bg-white shadow-md border border-red-100 flex items-center justify-center p-2">
+                            <img src="https://lh3.googleusercontent.com/d/1d-4vkKOiB8O_R_kbJVIomSpUQUTjCTcD" alt="Icon TCM" class="w-full h-full object-contain">
+                        </div>
+                    </div>
+                    <div class="p-5 pt-8 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-teal-900">แพทย์แผนจีน</h3>
+                        <p class="text-xs text-slate-500 mt-1 flex-1">ฝังเข็มเพื่อการรักษา ครอบแก้ว ฝังเข็มใบหน้า และเม็ดผักกาดแปะหู ปรับสมดุลร่างกาย</p>
+                        <div class="mt-4 bg-rose-50/80 border border-rose-100 rounded-xl px-3 py-2 flex items-center justify-between">
+                            <span class="text-[11px] font-semibold text-slate-600">ตามสิทธิการรักษา</span>
+                            <span class="text-sm font-extrabold text-rose-800">0 – 300 บาท</span>
+                        </div>
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <button onclick="filterAndScroll('tcm')" class="text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 py-2.5 rounded-xl transition-colors">ดูเรตราคา</button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 py-2.5 rounded-xl text-center transition-colors">จองคิว <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: บริการดูแลมารดาหลังคลอด -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col card-hover">
+                    <div class="h-44 relative overflow-hidden">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%97%E0%B8%B1%E0%B8%9A%E0%B8%AB%E0%B8%A1%E0%B9%89%E0%B8%AD%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD.png?raw=true" alt="มารดาหลังคลอด" class="w-full h-full object-cover">
+                        <div class="absolute -bottom-6 left-5 w-14 h-14 rounded-2xl bg-white shadow-md border border-pink-100 flex items-center justify-center p-2">
+                            <img src="https://lh3.googleusercontent.com/d/1EGJP2nE7NbK5Fb0bMmQ5G1dCMS4QE7Ql" alt="Icon Postpartum" class="w-full h-full object-contain">
+                        </div>
+                    </div>
+                    <div class="p-5 pt-8 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-teal-900">ดูแลมารดาหลังคลอด</h3>
+                        <p class="text-xs text-slate-500 mt-1 flex-1">นวดฟื้นฟู ทับหม้อเกลือ ประคบสมุนไพร กระตุ้นน้ำนม และดูแลสุขภาพคุณแม่หลังคลอด (2 ชม.)</p>
+                        <div class="mt-4 bg-pink-50/80 border border-pink-100 rounded-xl px-3 py-2 flex items-center justify-between">
+                            <span class="text-[11px] font-semibold text-slate-600">ตามสิทธิการรักษา</span>
+                            <span class="text-sm font-extrabold text-pink-800">0 – 670 บาท</span>
+                        </div>
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <button onclick="filterAndScroll('postpartum')" class="text-xs font-bold text-pink-700 bg-pink-50 hover:bg-pink-100 py-2.5 rounded-xl transition-colors">ดูเรตราคา</button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 py-2.5 rounded-xl text-center transition-colors">จองคิว <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 4: อบไอน้ำสมุนไพร & สปา -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 flex flex-col card-hover">
+                    <div class="h-44 relative overflow-hidden">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%AD%E0%B8%9A%E0%B9%84%E0%B8%AD%E0%B8%99%E0%B9%89%E0%B8%B3.png?raw=true" alt="อบไอน้ำสมุนไพร" class="w-full h-full object-cover">
+                        <div class="absolute -bottom-6 left-5 w-14 h-14 rounded-2xl bg-white shadow-md border border-blue-100 flex items-center justify-center p-2">
+                            <img src="https://lh3.googleusercontent.com/d/1drV8_zMkCqYi41Esp3c2dTstpzjqRf5Z" alt="Icon Steam" class="w-full h-full object-contain">
+                        </div>
+                    </div>
+                    <div class="p-5 pt-8 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-teal-900">อบไอน้ำสมุนไพร & สปา</h3>
+                        <p class="text-xs text-slate-500 mt-1 flex-1">ช่วยกระตุ้นการไหลเวียนโลหิต บรรเทาอาการปวดเมื่อย พร้อมบริการสครับเกลือและสปาผิว</p>
+                        <div class="mt-4 bg-sky-50/80 border border-sky-100 rounded-xl px-3 py-2 flex items-center justify-between">
+                            <span class="text-[11px] font-semibold text-slate-600">อบสมุนไพรตามสิทธิ</span>
+                            <span class="text-sm font-extrabold text-sky-800">0 – 120 บาท</span>
+                        </div>
+                        <div class="mt-3 grid grid-cols-2 gap-2">
+                            <button onclick="filterAndScroll('wellness')" class="text-xs font-bold text-sky-700 bg-sky-50 hover:bg-sky-100 py-2.5 rounded-xl transition-colors">ดูเรตราคา</button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="text-xs font-bold text-white bg-teal-600 hover:bg-teal-700 py-2.5 rounded-xl text-center transition-colors">จองคิว <i class="fa-solid fa-arrow-right ml-0.5"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 4. แพ็กเกจแนะนำ (จับคู่บริการต่อเนื่อง Add-on ตามเรต รพ.) ==================== -->
+    <section id="packages" class="py-12 bg-teal-900/5 border-y border-teal-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <span class="inline-block bg-teal-100 text-teal-800 text-xs font-extrabold px-3 py-1 rounded-full mb-2">คุ้มค่า ดูแลครบ จบในที่เดียว</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-teal-950">แพ็กเกจแนะนำ (จับคู่บริการต่อเนื่อง Add-on)</h2>
+                    <p class="text-sm text-slate-600 mt-1">สามารถเลือกรับบริการต่อเนื่องชั่วโมงที่ 2 หรืออบไอน้ำสมุนไพรต่อได้ทันทีตามเรตราคาจริงของโรงพยาบาล</p>
+                </div>
+                <a href="#calculator" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold shadow transition-all self-start md:self-auto">
+                    <i class="fa-solid fa-Sliders"></i> ลองจัดเซตตามสิทธิของคุณเอง <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+
+            <!-- 4 Recommended Add-on Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Package 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-teal-100 flex flex-col relative card-hover">
+                    <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">ยอดนิยม</span>
+                    <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%99%E0%B8%A7%E0%B8%94.png?raw=true" alt="นวดแผนไทยต่อเนื่อง 2 ชม." class="h-40 w-full object-cover">
+                    <div class="p-5 flex-1 flex flex-col">
+                        <p class="text-xs font-bold text-teal-600">แพ็กเกจจับคู่ต่อเนื่อง 1</p>
+                        <h3 class="text-base font-extrabold text-slate-800 mt-0.5">นวดแผนไทยเต็มอิ่ม 2 ชั่วโมง</h3>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mt-3 flex-1">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span><b>ชม.ที่ 1:</b> นวดและประคบเพื่อการรักษา (0 / 100 / 250.- ตามสิทธิ)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-plus text-amber-500 mt-0.5"></i> <span><b>ชม.ที่ 2:</b> นวดตัวส่งเสริมสุขภาพต่อเนื่อง (+250.-)</span></li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <p class="text-[11px] text-slate-400">ชำระรวมเพียง (ในเวลา)</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xl font-black text-teal-700">250 – 500 บาท</span>
+                                <span class="text-[11px] text-emerald-600 font-bold">ตามสิทธิ</span>
+                            </div>
+                        </div>
+                        <button onclick="applyPresetPackage('ttm_2hr')" class="mt-3 w-full bg-teal-700 hover:bg-teal-800 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-cart-plus"></i> ลองคำนวณตามสิทธิของคุณ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-teal-100 flex flex-col relative card-hover">
+                    <span class="absolute top-3 right-3 bg-rose-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">ผสานไทย-จีน</span>
+                    <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%9D%E0%B8%B1%E0%B8%87%E0%B9%80%E0%B8%82%E0%B9%87%E0%B8%A1.png?raw=true" alt="นวดแผนไทย + ฝังเข็ม" class="h-40 w-full object-cover">
+                    <div class="p-5 flex-1 flex flex-col">
+                        <p class="text-xs font-bold text-rose-600">แพ็กเกจจับคู่ต่อเนื่อง 2</p>
+                        <h3 class="text-base font-extrabold text-slate-800 mt-0.5">นวดแผนไทย + ฝังเข็ม/ครอบแก้ว</h3>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mt-3 flex-1">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span><b>ชม.ที่ 1:</b> นวดและประคบเพื่อการรักษา (ตามสิทธิ)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-plus text-rose-500 mt-0.5"></i> <span><b>ชม.ที่ 2:</b> เลือกต่อด้วย ฝังเข็ม (+200.-) หรือ ครอบแก้ว (+150.-)</span></li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <p class="text-[11px] text-slate-400">ชำระรวมเพียง (ในเวลา)</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xl font-black text-teal-700">150 – 450 บาท</span>
+                                <span class="text-[11px] text-rose-600 font-bold">ตามสิทธิ</span>
+                            </div>
+                        </div>
+                        <button onclick="applyPresetPackage('ttm_acupuncture')" class="mt-3 w-full bg-teal-700 hover:bg-teal-800 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-cart-plus"></i> ลองคำนวณตามสิทธิของคุณ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-teal-100 flex flex-col relative card-hover">
+                    <span class="absolute top-3 right-3 bg-sky-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">สุดคุ้ม</span>
+                    <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%AD%E0%B8%9A%E0%B9%84%E0%B8%AD%E0%B8%99%E0%B9%89%E0%B8%B3.png?raw=true" alt="นวด/ฝังเข็ม + อบไอน้ำสมุนไพร" class="h-40 w-full object-cover">
+                    <div class="p-5 flex-1 flex flex-col">
+                        <p class="text-xs font-bold text-sky-600">แพ็กเกจจับคู่ต่อเนื่อง 3</p>
+                        <h3 class="text-base font-extrabold text-slate-800 mt-0.5">บริการหลัก + อบไอน้ำสมุนไพร</h3>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mt-3 flex-1">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-0.5"></i> <span><b>ชม.ที่ 1:</b> นวดแผนไทย หรือ ฝังเข็ม (ตามสิทธิ)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-fire-flame-simple text-sky-500 mt-0.5"></i> <span><b>อบสมุนไพรต่อ:</b> สิทธิข้าราชการ/บัตรทอง <b>ฟรี 0.-</b> (สิทธิอื่น +100.-)</span></li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <p class="text-[11px] text-slate-400">ชำระรวมเพียง (ในเวลา)</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xl font-black text-teal-700">0 – 350 บาท</span>
+                                <span class="text-[11px] text-sky-600 font-bold">ตามสิทธิ</span>
+                            </div>
+                        </div>
+                        <button onclick="applyPresetPackage('ttm_steam')" class="mt-3 w-full bg-teal-700 hover:bg-teal-800 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-cart-plus"></i> ลองคำนวณตามสิทธิของคุณ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package 4 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-teal-100 flex flex-col relative card-hover">
+                    <span class="absolute top-3 right-3 bg-pink-600 text-white text-[11px] font-bold px-3 py-1 rounded-full shadow">คุณแม่หลังคลอด</span>
+                    <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%97%E0%B8%B1%E0%B8%9A%E0%B8%AB%E0%B8%A1%E0%B9%89%E0%B8%AD%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD.png?raw=true" alt="ฟื้นฟูมารดาหลังคลอด" class="h-40 w-full object-cover">
+                    <div class="p-5 flex-1 flex flex-col">
+                        <p class="text-xs font-bold text-pink-600">แพ็กเกจฟื้นฟูคุณแม่</p>
+                        <h3 class="text-base font-extrabold text-slate-800 mt-0.5">ดูแลมารดาหลังคลอดครบสูตร</h3>
+                        <ul class="text-xs text-slate-600 space-y-1.5 mt-3 flex-1">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-pink-500 mt-0.5"></i> <span>นวดฟื้นฟู + ประคบสมุนไพร + ทับหม้อเกลือ + อบไอน้ำ (2 ชม.)</span></li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-shield-heart text-pink-500 mt-0.5"></i> <span>ข้าราชการ/บัตรทองยกเว้นร่วม <b>0.-</b> | บัตรทองร่วมจ่าย <b>30.-</b></span></li>
+                        </ul>
+                        <div class="mt-4 pt-3 border-t border-slate-100">
+                            <p class="text-[11px] text-slate-400">ชำระรวมตามสิทธิ (เฉพาะในเวลา)</p>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-xl font-black text-teal-700">0 / 30 / 500.-</span>
+                            </div>
+                        </div>
+                        <button onclick="applyPresetPackage('postpartum_full')" class="mt-3 w-full bg-teal-700 hover:bg-teal-800 text-white py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-cart-plus"></i> ลองคำนวณตามสิทธิของคุณ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- กล่องสรุปเงื่อนไขค่าบริการส่วนเพิ่ม -->
+            <div class="mt-8 bg-amber-50/90 border-l-4 border-amber-500 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col sm:flex-row gap-4 items-start">
+                <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 text-lg">
+                    <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <div class="text-xs sm:text-sm text-slate-700 space-y-1">
+                    <p class="font-extrabold text-amber-900 text-sm sm:text-base">เงื่อนไขค่าบริการและส่วนเพิ่ม (Add-on Conditions):</p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-700">
+                        <li><b>ค่านอกเวลาราชการ / วันเสาร์ / วันหยุดนักขัตฤกษ์ (OOH):</b> บวกเพิ่ม <b>60 บาท</b> ทั้งแผนกแพทย์แผนไทยและแพทย์แผนจีน (ยกเว้นนวดและประคบเพื่อการรักษาสิทธิบัตรทอง และบริการปรึกษาแพทย์แผนจีน ไม่มีค่านอกเวลา)</li>
+                        <li><b>การจองต่อเนื่องชั่วโมงที่ 2:</b> นวดแผนไทย บวกเพิ่ม <b>250 บาท</b> | ฝังเข็มแผนจีน บวกเพิ่ม <b>200 บาท</b> | ครอบแก้ว บวกเพิ่ม <b>150 บาท</b></li>
+                        <li><b>บริการอบไอน้ำสมุนไพรต่อเนื่อง:</b> สิทธิข้าราชการ และ สิทธิบัตรทอง <b>ฟรี 0 บาท</b> | สิทธิประกันสังคม / รัฐวิสาหกิจ / ชำระเงินเอง ชำระเพิ่ม <b>100 บาท</b></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. INTERACTIVE MIX & MATCH PRICE CALCULATOR (ตะกร้าทดลองคำนวณราคา) ==================== -->
+    <section id="calculator" class="py-14 bg-gradient-to-br from-teal-900 via-teal-800 to-emerald-900 text-white relative overflow-hidden">
+        <!-- Decorative blobs -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-teal-400/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-1.5 bg-amber-400/20 border border-amber-300/40 text-amber-300 text-xs font-bold px-3.5 py-1 rounded-full mb-3">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> ฟีเจอร์พิเศษ! ลองหยิบผสมบริการได้ตามใจ
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold">🛒 ตะกร้าจำลองจัดเซต & คำนวณค่าบริการตามสิทธิ</h2>
+                <p class="text-teal-100 text-sm sm:text-base mt-2">
+                    เลือกสิทธิการรักษาของคุณ แล้วลองหยิบบริการหลัก จับคู่บริการต่อเนื่อง หรืออบไอน้ำสมุนไพร เพื่อเช็กยอดชำระโดยประมาณก่อนจองจริง
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Left Column: Builder Controls (7 cols) -->
+                <div class="lg:col-span-7 bg-white text-slate-800 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6">
+                    
+                    <!-- Step 1: เลือกสิทธิการรักษา -->
+                    <div>
+                        <label class="flex items-center gap-2 text-sm sm:text-base font-extrabold text-teal-900 mb-3">
+                            <span class="w-6 h-6 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center">1</span>
+                            เลือกสิทธิการรักษาของคุณ
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="calc-rights-grid">
+                            <button type="button" onclick="setCalcRight('1')" data-right="1" class="calc-right-btn border-2 border-teal-600 bg-teal-50 p-3 rounded-2xl text-left flex items-center gap-3 transition-all">
+                                <div class="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-id-card"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-xs sm:text-sm text-teal-950 truncate">บัตรทอง (ร่วมจ่าย 30 บาท)</p>
+                                    <p class="text-[11px] text-slate-500">อายุ 12–59 ปี</p>
+                                </div>
+                            </button>
+                            <button type="button" onclick="setCalcRight('2')" data-right="2" class="calc-right-btn border-2 border-slate-200 hover:border-teal-300 bg-white p-3 rounded-2xl text-left flex items-center gap-3 transition-all">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-id-card-clip"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-xs sm:text-sm text-slate-800 truncate">บัตรทอง (ยกเว้นร่วมจ่าย)</p>
+                                    <p class="text-[11px] text-slate-500">ผู้สูงอายุ 60 ปี+, อสม., ผู้มีรายได้น้อย</p>
+                                </div>
+                            </button>
+                            <button type="button" onclick="setCalcRight('3')" data-right="3" class="calc-right-btn border-2 border-slate-200 hover:border-teal-300 bg-white p-3 rounded-2xl text-left flex items-center gap-3 transition-all">
+                                <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-building-flag"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-xs sm:text-sm text-slate-800 truncate">ข้าราชการ / อปท.</p>
+                                    <p class="text-[11px] text-slate-500">เบิกจ่ายตรง ไม่ต้องสำรองจ่าย</p>
+                                </div>
+                            </button>
+                            <button type="button" onclick="setCalcRight('4')" data-right="4" class="calc-right-btn border-2 border-slate-200 hover:border-teal-300 bg-white p-3 rounded-2xl text-left flex items-center gap-3 transition-all">
+                                <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-landmark"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-xs sm:text-sm text-slate-800 truncate">รัฐวิสาหกิจ</p>
+                                    <p class="text-[11px] text-slate-500">สำรองจ่าย เบิกต้นสังกัด</p>
+                                </div>
+                            </button>
+                            <button type="button" onclick="setCalcRight('5')" data-right="5" class="calc-right-btn sm:col-span-2 border-2 border-slate-200 hover:border-teal-300 bg-white p-3 rounded-2xl text-left flex items-center gap-3 transition-all">
+                                <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0"><i class="fa-solid fa-wallet"></i></div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-xs sm:text-sm text-slate-800 truncate">ประกันสังคม / ชำระเงินเอง</p>
+                                    <p class="text-[11px] text-slate-500">ชำระเงินสด หรือ สแกน QR Code</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: เลือกช่วงเวลารับบริการ -->
+                    <div>
+                        <label class="flex items-center gap-2 text-sm sm:text-base font-extrabold text-teal-900 mb-3">
+                            <span class="w-6 h-6 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center">2</span>
+                            เลือกช่วงเวลารับบริการ
+                        </label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button type="button" id="time-btn-in" onclick="setCalcTimeMode('in')" class="border-2 border-teal-600 bg-teal-50 p-3 rounded-2xl text-center transition-all">
+                                <p class="font-extrabold text-xs sm:text-sm text-teal-900"><i class="fa-regular fa-sun mr-1 text-teal-600"></i> ในเวลาราชการ</p>
+                                <p class="text-[11px] text-slate-500 mt-0.5">จันทร์–ศุกร์ (08:00–16:00 น.)</p>
+                            </button>
+                            <button type="button" id="time-btn-out" onclick="setCalcTimeMode('out')" class="border-2 border-slate-200 bg-white p-3 rounded-2xl text-center transition-all">
+                                <p class="font-extrabold text-xs sm:text-sm text-slate-800"><i class="fa-regular fa-moon mr-1 text-amber-500"></i> นอกเวลา / เสาร์ / วันหยุด</p>
+                                <p class="text-[11px] text-amber-600 font-semibold mt-0.5">+60 บาท (ตามเงื่อนไข รพ.)</p>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: เลือกบริการหลัก (ชั่วโมงที่ 1) -->
+                    <div>
+                        <label class="flex items-center justify-between text-sm sm:text-base font-extrabold text-teal-900 mb-3">
+                            <span class="flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-teal-600 text-white text-xs flex items-center justify-center">3</span>
+                                เลือกบริการหลักที่ต้องการ
+                            </span>
+                            <span class="text-xs font-normal text-slate-500">คลิกเลือก 1 บริการหลัก</span>
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="calc-main-service-list">
+                            <!-- สร้างด้วย JS เพื่อแสดงราคาตามสิทธิแบบ Real-time -->
+                        </div>
+                    </div>
+
+                    <!-- Step 4: หยิบบริการเสริมต่อเนื่อง (Add-on Mix & Match) -->
+                    <div id="calc-addon-section" class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-4">
+                        <div>
+                            <label class="flex items-center gap-2 text-sm font-extrabold text-teal-900 mb-2">
+                                <span class="w-6 h-6 rounded-full bg-amber-500 text-white text-xs flex items-center justify-center">4</span>
+                                อยากรับบริการต่อเนื่องชั่วโมงที่ 2 ไหมครับ? (เลือกผสมได้)
+                            </label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="calc-second-hour-options">
+                                <button type="button" onclick="setCalcAddon('none')" data-addon="none" class="calc-addon-btn border-2 border-teal-600 bg-white p-2.5 rounded-xl text-left text-xs font-bold flex items-center justify-between">
+                                    <span><i class="fa-regular fa-circle-xmark text-slate-400 mr-1.5"></i> ไม่รับบริการชั่วโมงที่ 2</span>
+                                    <span class="text-slate-400">0.-</span>
+                                </button>
+                                <button type="button" onclick="setCalcAddon('ttm_2hr')" data-addon="ttm_2hr" class="calc-addon-btn border-2 border-slate-200 bg-white p-2.5 rounded-xl text-left text-xs font-bold flex items-center justify-between">
+                                    <span><i class="fa-solid fa-hands text-emerald-600 mr-1.5"></i> + นวดแผนไทย ชม.ที่ 2</span>
+                                    <span class="text-emerald-700 font-extrabold">+250.-</span>
+                                </button>
+                                <button type="button" onclick="setCalcAddon('acu_2hr')" data-addon="acu_2hr" class="calc-addon-btn border-2 border-slate-200 bg-white p-2.5 rounded-xl text-left text-xs font-bold flex items-center justify-between">
+                                    <span><i class="fa-solid fa-yin-yang text-rose-600 mr-1.5"></i> + ฝังเข็มเพื่อการรักษา</span>
+                                    <span class="text-rose-700 font-extrabold">+200.-</span>
+                                </button>
+                                <button type="button" onclick="setCalcAddon('cup_2hr')" data-addon="cup_2hr" class="calc-addon-btn border-2 border-slate-200 bg-white p-2.5 rounded-xl text-left text-xs font-bold flex items-center justify-between">
+                                    <span><i class="fa-solid fa-fire-burner text-orange-600 mr-1.5"></i> + ครอบแก้วต่อเนื่อง</span>
+                                    <span class="text-orange-700 font-extrabold">+150.-</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Toggle อบไอน้ำสมุนไพรต่อเนื่อง -->
+                        <div class="pt-3 border-t border-slate-200 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-hot-tub-person"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs sm:text-sm font-extrabold text-slate-800">เพิ่มอบไอน้ำสมุนไพรปิดท้าย (+30 นาที)</p>
+                                    <p class="text-[11px] text-sky-700 font-semibold" id="calc-steam-addon-desc">สิทธิข้าราชการ/บัตรทอง ฟรี 0 บาท!</p>
+                                </div>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="calc-steam-toggle" class="sr-only peer" onchange="toggleCalcSteam()">
+                                <div class="w-12 h-7 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-teal-600"></div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Live Receipt Summary (5 cols) -->
+                <div class="lg:col-span-5 lg:sticky lg:top-24">
+                    <div class="bg-white text-slate-800 rounded-3xl p-6 shadow-2xl border-t-8 border-teal-500 relative">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-10 h-10 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-receipt"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-extrabold text-base text-slate-900">ใบสรุปค่าบริการจำลอง</h3>
+                                    <p class="text-xs text-slate-500">Sadao Wellness Price Simulator</p>
+                                </div>
+                            </div>
+                            <button onclick="resetCalculator()" class="text-xs text-slate-400 hover:text-rose-600 font-semibold flex items-center gap-1">
+                                <i class="fa-solid fa-rotate-left"></i> ล้างค่า
+                            </button>
+                        </div>
+
+                        <!-- Selected Right & Time Badge -->
+                        <div class="bg-teal-50/80 border border-teal-100 rounded-2xl p-3.5 mb-4 space-y-1.5">
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-500 font-medium">สิทธิที่เลือก:</span>
+                                <span class="font-extrabold text-teal-900" id="receipt-right-name">บัตรทอง (ร่วมจ่าย 30 บาท)</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs">
+                                <span class="text-slate-500 font-medium">ช่วงเวลา:</span>
+                                <span class="font-bold text-teal-700" id="receipt-time-name">ในเวลาราชการ (08:00–16:00 น.)</span>
+                            </div>
+                        </div>
+
+                        <div class="receipt-dashed my-4"></div>
+
+                        <!-- Itemized List -->
+                        <div class="space-y-3 min-h-[130px]" id="receipt-items-list">
+                            <!-- เติมด้วย JS -->
+                        </div>
+
+                        <div class="receipt-dashed my-4"></div>
+
+                        <!-- Savings Banner -->
+                        <div id="receipt-saving-box" class="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5 mb-4 flex items-center justify-between text-xs">
+                            <span class="text-emerald-800 font-bold"><i class="fa-solid fa-piggy-bank mr-1 text-emerald-600"></i> ประหยัดจากสิทธิการรักษา</span>
+                            <span class="font-extrabold text-emerald-700" id="receipt-saving-amount">150 บาท</span>
+                        </div>
+
+                        <!-- Total Price -->
+                        <div class="bg-slate-900 text-white rounded-2xl p-4 flex items-center justify-between mb-5">
+                            <div>
+                                <p class="text-xs text-teal-300 font-semibold">ยอดชำระสุทธิโดยประมาณ</p>
+                                <p class="text-[11px] text-slate-400" id="receipt-duration-text">เวลารับบริการรวมประมาณ 60 นาที</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-3xl font-black text-amber-400" id="receipt-total-price">100.-</span>
+                            </div>
+                        </div>
+
+                        <!-- Warning / Notice if any -->
+                        <p id="receipt-warning-msg" class="hidden text-xs text-rose-600 bg-rose-50 border border-rose-200 rounded-xl p-2.5 mb-4 font-semibold text-center"></p>
+
+                        <!-- Action Button (Changes to Phone Call if Spa is chosen, otherwise Online Queue) -->
+                        <div id="receipt-action-area">
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white py-4 rounded-2xl font-extrabold text-base shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                                <i class="fa-regular fa-calendar-check"></i> ไปหน้าจองคิวออนไลน์ทันที <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <p class="text-[11px] text-center text-slate-400 mt-3">
+                            *ราคาข้างต้นเป็นการคำนวณเบื้องต้นตามสิทธิการรักษาของโรงพยาบาลสะเดา
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. ตารางบริการและอัตราค่าบริการทั้งหมด (10 รายการ) ==================== -->
+    <section id="services" class="py-14 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 bg-teal-50 px-3 py-1 rounded-full">เรตราคาโรงพยาบาลรัฐตามสิทธิ</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-teal-950 mt-2">อัตราค่าบริการแยกตามสิทธิการรักษา</h2>
+                <p class="text-sm text-slate-600 mt-1">เปรียบเทียบราคาในเวลาราชการ และนอกเวลาราชการ (+60 บาท) พร้อมปุ่มหยิบใส่ตะกร้าทดลองคำนวณราคา</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="filterServiceCards('all', this)" class="svc-filter-btn active bg-teal-700 text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all">
+                    ดูทั้งหมด (10 บริการ)
+                </button>
+                <button onclick="filterServiceCards('ttm', this)" class="svc-filter-btn bg-slate-100 hover:bg-teal-50 text-slate-700 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all">
+                    🌿 แพทย์แผนไทย
+                </button>
+                <button onclick="filterServiceCards('tcm', this)" class="svc-filter-btn bg-slate-100 hover:bg-rose-50 text-slate-700 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all">
+                    🪡 แพทย์แผนจีน
+                </button>
+                <button onclick="filterServiceCards('postpartum', this)" class="svc-filter-btn bg-slate-100 hover:bg-pink-50 text-slate-700 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all">
+                    🤱 หลังคลอด & อบไอน้ำ
+                </button>
+                <button onclick="filterServiceCards('wellness', this)" class="svc-filter-btn bg-slate-100 hover:bg-amber-50 text-slate-700 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all">
+                    ✨ สปา Wellness
+                </button>
+            </div>
+
+            <!-- Services Grid (10 Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" id="services-cards-grid">
+
+                <!-- 1. นวดและประคบเพื่อการรักษา -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="ttm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%84%E0%B8%9A.png?raw=true" alt="นวดและประคบเพื่อการรักษา" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-emerald-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนไทย</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 60 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">นวดและประคบเพื่อการรักษา</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center border-b border-dashed border-slate-200 pb-1.5">
+                                <span class="col-span-6 font-medium text-slate-700">ข้าราชการ / อปท.</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">0.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">60.-</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center border-b border-dashed border-slate-200 pb-1.5">
+                                <span class="col-span-6 font-medium text-slate-700">บัตรทอง (ร่วม/ยกเว้นร่วม)</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">100.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">100.-</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center">
+                                <span class="col-span-6 font-medium text-slate-700">ประกันสังคม/รัฐวิสาหกิจ/ชำระเอง</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">250.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">310.-</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('ttm_treat')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. นวดตัวส่งเสริมสุขภาพ -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="ttm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%99%E0%B8%A7%E0%B8%94.png?raw=true" alt="นวดตัวส่งเสริมสุขภาพ" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-emerald-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนไทย</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 60 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">นวดตัวส่งเสริมสุขภาพ (ชำระเงินเอง)</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center py-2">
+                                <span class="col-span-6 font-medium text-slate-700">ทุกสิทธิการรักษา</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700 text-sm">250.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600 text-sm">310.-</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 pt-2">*บริการเพื่อการผ่อนคลายและส่งเสริมสุขภาพ (เบิกไม่ได้)</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('ttm_relax')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. นวดเท้าส่งเสริมสุขภาพ -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="ttm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%99%E0%B8%A7%E0%B8%94%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2.png?raw=true" alt="นวดเท้าส่งเสริมสุขภาพ" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-emerald-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนไทย</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 60 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">นวดเท้าส่งเสริมสุขภาพ (ชำระเงินเอง)</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center py-2">
+                                <span class="col-span-6 font-medium text-slate-700">ทุกสิทธิการรักษา</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700 text-sm">250.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600 text-sm">310.-</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 pt-2">*กระตุ้นจุดสะท้อนฝ่าเท้า ผ่อนคลายความเมื่อยล้า</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('ttm_foot')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. บริการหลังคลอด (Postpartum) -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="postpartum">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%97%E0%B8%B1%E0%B8%9A%E0%B8%AB%E0%B8%A1%E0%B9%89%E0%B8%AD%E0%B9%80%E0%B8%81%E0%B8%A5%E0%B8%B7%E0%B8%AD.png?raw=true" alt="บริการหลังคลอด" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">ดูแลมารดาหลังคลอด</span>
+                        <span class="absolute bottom-3 right-3 bg-rose-700/90 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-solid fa-ban mr-1"></i> เฉพาะในเวลาราชการ (2 ชม.)</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">บริการดูแลมารดาหลังคลอด (2 ชม.)</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="flex justify-between font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span>สิทธิการรักษา</span>
+                                <span>ในเวลาราชการ</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-dashed border-slate-200 pb-1">
+                                <span class="font-medium text-slate-700">ข้าราชการ / บัตรทอง(ยกเว้นร่วมจ่าย)</span>
+                                <span class="font-extrabold text-teal-700">0.-</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-dashed border-slate-200 pb-1">
+                                <span class="font-medium text-slate-700">บัตรทอง (ร่วมจ่าย)</span>
+                                <span class="font-extrabold text-teal-700">30.-</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-dashed border-slate-200 pb-1">
+                                <span class="font-medium text-slate-700">ประกันสังคม / ชำระเงินเอง</span>
+                                <span class="font-extrabold text-teal-700">500.-</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium text-slate-700">รัฐวิสาหกิจ (สำรองจ่าย)</span>
+                                <span class="font-extrabold text-teal-700">670.-</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('postpartum')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. อบไอน้ำสมุนไพร -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="postpartum">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%AD%E0%B8%9A%E0%B9%84%E0%B8%AD%E0%B8%99%E0%B9%89%E0%B8%B3.png?raw=true" alt="อบไอน้ำสมุนไพร" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนไทย</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> 30–45 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">อบไอน้ำสมุนไพร</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center border-b border-dashed border-slate-200 pb-1">
+                                <span class="col-span-6 font-medium text-slate-700">ข้าราชการ/บัตรทอง(ยกเว้น)</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">0.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">60.-</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center border-b border-dashed border-slate-200 pb-1">
+                                <span class="col-span-6 font-medium text-slate-700">บัตรทอง (ร่วมจ่าย)</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">30.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">90.-</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center border-b border-dashed border-slate-200 pb-1">
+                                <span class="col-span-6 font-medium text-slate-700">ประกันสังคม / ชำระเอง</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">100.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">160.-</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center">
+                                <span class="col-span-6 font-medium text-slate-700">รัฐวิสาหกิจ (สำรองจ่าย)</span>
+                                <span class="col-span-3 text-right font-extrabold text-teal-700">120.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">180.-</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('steam_only')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-teal-600 hover:bg-teal-700 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. ฝังเข็มเพื่อการรักษา -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="tcm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%9D%E0%B8%B1%E0%B8%87%E0%B9%80%E0%B8%82%E0%B9%87%E0%B8%A1.png?raw=true" alt="ฝังเข็มเพื่อการรักษา" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-rose-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนจีน</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 30–60 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">ฝังเข็มเพื่อการรักษา</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center border-b border-dashed border-slate-200 pb-1.5">
+                                <span class="col-span-6 font-medium text-slate-700">ข้าราชการ / อปท.</span>
+                                <span class="col-span-3 text-right font-extrabold text-rose-700">0.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">60.-</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center">
+                                <span class="col-span-6 font-medium text-slate-700">สิทธิอื่นๆ ทั้งหมด</span>
+                                <span class="col-span-3 text-right font-extrabold text-rose-700">200.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600">260.-</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 pt-1">*นอกเวลาเปิดเฉพาะวันอังคาร และ วันพฤหัสบดี (16:30–20:00 น.)</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('tcm_acu')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-rose-700 hover:bg-rose-800 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. ครอบแก้ว -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="tcm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B9%81%E0%B8%81%E0%B9%89%E0%B8%A7.png?raw=true" alt="ครอบแก้ว" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-rose-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนจีน</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 30 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">ครอบแก้ว (Cupping Therapy)</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center py-2">
+                                <span class="col-span-6 font-medium text-slate-700">ทุกสิทธิการรักษา</span>
+                                <span class="col-span-3 text-right font-extrabold text-rose-700 text-sm">150.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600 text-sm">210.-</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 pt-1">*กระตุ้นการไหลเวียนเลือดและลมปราณ ลดปวดตึงกล้ามเนื้อ</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('tcm_cup')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-rose-700 hover:bg-rose-800 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. ฝังเข็มใบหน้า -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="tcm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%9D%E0%B8%B1%E0%B8%87%E0%B9%80%E0%B8%82%E0%B9%87%E0%B8%A1%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2.png?raw=true" alt="ฝังเข็มใบหน้า" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-rose-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนจีน</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 30 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">ฝังเข็มใบหน้าเพื่อสุขภาพและฟื้นฟู</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center py-2">
+                                <span class="col-span-6 font-medium text-slate-700">ทุกสิทธิการรักษา</span>
+                                <span class="col-span-3 text-right font-extrabold text-rose-700 text-sm">300.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600 text-sm">360.-</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 pt-1">*กระตุ้นการไหลเวียนโลหิตบริเวณใบหน้า ปรับสมดุลผิว</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('tcm_face')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-rose-700 hover:bg-rose-800 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. เม็ดผักกาดแปะหู (อัปเดตราคา 100 บาท) -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200/80 flex flex-col card-hover" data-category="tcm">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B9%81%E0%B8%9B%E0%B8%B0%E0%B8%AB%E0%B8%B9.png?raw=true" alt="เม็ดผักกาดแปะหู" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-rose-700 text-white text-xs font-bold px-3 py-1 rounded-full shadow">แพทย์แผนจีน</span>
+                        <span class="absolute bottom-3 right-3 bg-black/60 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-regular fa-clock mr-1"></i> ไม่เกิน 10–15 นาที</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">เม็ดผักกาดแปะหู</h3>
+                        <div class="bg-slate-50 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-slate-100">
+                            <div class="grid grid-cols-12 font-bold text-slate-400 border-b border-slate-200 pb-1.5">
+                                <span class="col-span-6">สิทธิการรักษา</span>
+                                <span class="col-span-3 text-right">ในเวลา</span>
+                                <span class="col-span-3 text-right text-amber-600">นอกเวลา</span>
+                            </div>
+                            <div class="grid grid-cols-12 items-center py-2">
+                                <span class="col-span-6 font-medium text-slate-700">ทุกสิทธิการรักษา</span>
+                                <span class="col-span-3 text-right font-extrabold text-rose-700 text-sm">100.-</span>
+                                <span class="col-span-3 text-right font-extrabold text-amber-600 text-sm">160.-</span>
+                            </div>
+                            <p class="text-[11px] text-slate-400 pt-1">*กดจุดสะท้อนบริเวณใบหู ช่วยเรื่องการนอนหลับและปรับสมดุล</p>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('tcm_ear')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-rose-700 hover:bg-rose-800 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-regular fa-calendar-check"></i> จองคิวนี้
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. บริการสปาผิว / สครับเกลือ (โทรนัดหมายล่วงหน้า) -->
+                <div class="service-item-card bg-white rounded-3xl overflow-hidden shadow-md border border-amber-200 flex flex-col card-hover" data-category="wellness">
+                    <div class="h-48 relative">
+                        <img src="https://github.com/TTMSADAO/ttmed-sadao-queue/blob/PIC/%E0%B8%AA%E0%B8%9B%E0%B8%B2.png?raw=true" alt="บริการสปาและสครับเกลือ" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Wellness Spa</span>
+                        <span class="absolute bottom-3 right-3 bg-amber-900/80 backdrop-blur text-white text-xs px-2.5 py-1 rounded-lg"><i class="fa-solid fa-phone-volume mr-1"></i> โทรนัดหมายล่วงหน้า</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="text-lg font-extrabold text-slate-800 mb-3">บริการสปาผิว / สครับเกลือ</h3>
+                        <div class="bg-amber-50/60 rounded-2xl p-3.5 text-xs space-y-2 flex-1 border border-amber-100">
+                            <div class="flex justify-between font-bold text-slate-400 border-b border-amber-200/60 pb-1.5">
+                                <span>โปรแกรมสปาเพื่อสุขภาพผิว</span>
+                                <span>อัตราค่าบริการ</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-dashed border-amber-200 pb-1.5">
+                                <span class="font-medium text-slate-700">สครับเกลือสมุนไพร (60 นาที)</span>
+                                <span class="font-extrabold text-amber-800 text-sm">500.-</span>
+                            </div>
+                            <div class="flex justify-between items-center border-b border-dashed border-amber-200 pb-1.5">
+                                <span class="font-medium text-slate-700">สปาผิวสมุนไพร (60 นาที)</span>
+                                <span class="font-extrabold text-amber-800 text-sm">650.-</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="font-medium text-slate-700">สปาผิวเต็มรูปแบบ (120 นาที)</span>
+                                <span class="font-extrabold text-amber-800 text-sm">1,000.-</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button onclick="pickServiceToCart('spa_60')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 py-2.5 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-calculator"></i> ลองคำนวณราคา
+                            </button>
+                            <a href="tel:0842671735" class="bg-amber-600 hover:bg-amber-700 text-white py-2.5 rounded-xl text-xs font-bold text-center transition-colors flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-phone"></i> โทรนัด 084-267-1735
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 7. สิทธิการรักษาที่รองรับ ==================== -->
+    <section class="py-10 bg-teal-50/60 border-y border-teal-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-center text-lg sm:text-xl font-extrabold text-teal-900 mb-6">สิทธิการรักษาพยาบาลที่รองรับ</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-teal-100 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-id-card"></i></div>
+                    <p class="font-bold text-sm text-slate-800">บัตรทอง (สปสช.)</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">ร่วมจ่าย 30 บาท (อายุ 12–59 ปี)</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-teal-100 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-person-cane"></i></div>
+                    <p class="font-bold text-sm text-slate-800">บัตรทอง (ยกเว้นร่วมจ่าย)</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">ผู้สูงอายุ 60 ปี+, อสม., ผู้มีรายได้น้อย</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-teal-100 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-building-flag"></i></div>
+                    <p class="font-bold text-sm text-slate-800">ข้าราชการ / อปท.</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">เบิกจ่ายตรง ไม่ต้องสำรองจ่าย</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-teal-100 flex flex-col items-center text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-landmark"></i></div>
+                    <p class="font-bold text-sm text-slate-800">รัฐวิสาหกิจ</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">สำรองจ่าย เบิกต้นสังกัดได้</p>
+                </div>
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-teal-100 flex flex-col items-center text-center col-span-2 sm:col-span-1">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl mb-2"><i class="fa-solid fa-wallet"></i></div>
+                    <p class="font-bold text-sm text-slate-800">ประกันสังคม / ชำระเอง</p>
+                    <p class="text-[11px] text-slate-500 mt-0.5">เงินสด หรือ สแกน QR Code</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 8. ทำเนียบทีมบุคลากรประจำ 15 ท่าน ==================== -->
+    <section id="team" class="py-14 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 bg-teal-50 px-3 py-1 rounded-full">บุคลากรของเรา</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-teal-950 mt-2">ทีมบุคลากรผู้ให้บริการ</h2>
+                <p class="text-sm text-slate-600 mt-1">ดูแลท่านอย่างใกล้ชิดด้วยมาตรฐานวิชาชีพ โดยทีมแพทย์และผู้เชี่ยวชาญประจำกลุ่มงานฯ</p>
+            </div>
+
+            <div id="team-directory-container" class="space-y-12">
+                <!-- สร้างด้วย JavaScript จากข้อมูลบุคลากรประจำทั้ง 15 ท่าน -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 9. วันและเวลาทำการ & ข้อมูลติดต่อเรา ==================== -->
+    <section id="contact" class="py-14 bg-gradient-to-b from-slate-50 to-teal-50/40 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-teal-950">วัน-เวลาทำการ และติดต่อเรา</h2>
+                <p class="text-sm text-slate-600 mt-1">ชั้น 4 ตึกมรกต โรงพยาบาลสะเดา 110 ถ.ปาดังเบซาร์ ต.สะเดา อ.สะเดา จ.สงขลา 90120</p>
+            </div>
+
+            <!-- ตารางเวลาทำการแยก 2 คลินิกชัดเจน -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <!-- เวลาทำการ แพทย์แผนไทย -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border-t-4 border-emerald-600">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://lh3.googleusercontent.com/d/1k-FNSpmwRok820gKcjIPkPwf-mwDljXM" alt="TTM" class="w-12 h-12 object-contain">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-emerald-900">เวลาทำการ คลินิกการแพทย์แผนไทย</h3>
+                            <p class="text-xs text-slate-500">นวดไทย ประคบสมุนไพร หลังคลอด และอบไอน้ำสมุนไพร</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2.5 text-xs sm:text-sm">
+                        <div class="flex justify-between items-center p-2.5 bg-emerald-50/70 rounded-xl">
+                            <span class="font-bold text-slate-700"><i class="fa-regular fa-clock text-emerald-600 mr-1.5"></i> จันทร์ – ศุกร์ (ในเวลาราชการ)</span>
+                            <span class="font-extrabold text-emerald-800">08.00 – 16.00 น.</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-amber-50/70 rounded-xl">
+                            <span class="font-bold text-slate-700"><i class="fa-regular fa-moon text-amber-600 mr-1.5"></i> จันทร์ – ศุกร์ (นอกเวลาราชการ)</span>
+                            <span class="font-extrabold text-amber-700">16.30 – 20.00 น.</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-sky-50/70 rounded-xl">
+                            <span class="font-bold text-slate-700"><i class="fa-regular fa-calendar-check text-sky-600 mr-1.5"></i> วันเสาร์ และ วันหยุดนักขัตฤกษ์</span>
+                            <span class="font-extrabold text-sky-800">08.00 – 16.00 น.</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-slate-100 rounded-xl text-slate-500">
+                            <span class="font-semibold"><i class="fa-solid fa-door-closed mr-1.5"></i> วันอาทิตย์</span>
+                            <span class="font-bold text-rose-600">ปิดทำการ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- เวลาทำการ แพทย์แผนจีน -->
+                <div class="bg-white rounded-3xl p-6 shadow-md border-t-4 border-rose-600">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="https://lh3.googleusercontent.com/d/1d-4vkKOiB8O_R_kbJVIomSpUQUTjCTcD" alt="TCM" class="w-12 h-12 object-contain">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-rose-900">เวลาทำการ คลินิกการแพทย์แผนจีน</h3>
+                            <p class="text-xs text-slate-500">ฝังเข็ม ครอบแก้ว ฝังเข็มใบหน้า และเม็ดผักกาดแปะหู</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2.5 text-xs sm:text-sm">
+                        <div class="flex justify-between items-center p-2.5 bg-rose-50/70 rounded-xl">
+                            <span class="font-bold text-slate-700"><i class="fa-regular fa-clock text-rose-600 mr-1.5"></i> จันทร์ – ศุกร์ (ในเวลาราชการ)</span>
+                            <span class="font-extrabold text-rose-800">08.00 – 16.00 น.</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-amber-50/70 rounded-xl">
+                            <span class="font-bold text-slate-700"><i class="fa-regular fa-moon text-amber-600 mr-1.5"></i> นอกเวลา (เฉพาะวันอังคาร & พฤหัสบดี)</span>
+                            <span class="font-extrabold text-amber-700">16.30 – 20.00 น.</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-slate-100 rounded-xl text-slate-500">
+                            <span class="font-semibold"><i class="fa-solid fa-door-closed mr-1.5"></i> จันทร์, พุธ, ศุกร์ (นอกเวลาราชการ)</span>
+                            <span class="font-bold text-slate-500">ไม่มีบริการนอกเวลา</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2.5 bg-slate-100 rounded-xl text-slate-500">
+                            <span class="font-semibold"><i class="fa-solid fa-door-closed mr-1.5"></i> วันเสาร์, อาทิตย์ และ วันหยุดนักขัตฤกษ์</span>
+                            <span class="font-bold text-rose-600">ปิดทำการ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- กล่องข้อมูลติดต่อ + QR Code + แผนที่ -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                <!-- ข้อมูลติดต่อและปุ่มลัด (7 cols) -->
+                <div class="lg:col-span-7 bg-white rounded-3xl p-6 shadow-md border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-teal-950 mb-4">ช่องทางการติดต่อและนัดหมาย</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a href="tel:0842671735" class="p-4 rounded-2xl bg-teal-50/70 hover:bg-teal-100/70 border border-teal-100 flex items-center gap-3.5 transition-colors">
+                                <div class="w-11 h-11 rounded-2xl bg-teal-600 text-white flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">เบอร์มือถือคลินิก</p>
+                                    <p class="text-base font-extrabold text-teal-900">08 4267 1735</p>
+                                </div>
+                            </a>
+                            <a href="tel:074379994" class="p-4 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center gap-3.5 transition-colors">
+                                <div class="w-11 h-11 rounded-2xl bg-slate-700 text-white flex items-center justify-center text-lg shrink-0"><i class="fa-solid fa-phone-volume"></i></div>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">เบอร์โรงพยาบาลสะเดา</p>
+                                    <p class="text-sm font-extrabold text-slate-800">0 7437 9994 ต่อ 410</p>
+                                </div>
+                            </a>
+                            <a href="https://lin.ee/ti1KjcK" target="_blank" rel="noopener" class="p-4 rounded-2xl bg-green-50/70 hover:bg-green-100/70 border border-green-200 flex items-center gap-3.5 transition-colors">
+                                <div class="w-11 h-11 rounded-2xl bg-[#06C755] text-white flex items-center justify-center text-2xl shrink-0"><i class="fa-brands fa-line"></i></div>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">LINE Official Account</p>
+                                    <p class="text-base font-extrabold text-green-800">@649dqeft</p>
+                                </div>
+                            </a>
+                            <a href="https://www.facebook.com/ttmsadao" target="_blank" rel="noopener" class="p-4 rounded-2xl bg-blue-50/70 hover:bg-blue-100/70 border border-blue-200 flex items-center gap-3.5 transition-colors">
+                                <div class="w-11 h-11 rounded-2xl bg-[#1877F2] text-white flex items-center justify-center text-xl shrink-0"><i class="fa-brands fa-facebook-f"></i></div>
+                                <div>
+                                    <p class="text-xs text-slate-500 font-medium">Facebook Page</p>
+                                    <p class="text-sm font-extrabold text-blue-900">การแพทย์แผนไทยฯ รพ.สะเดา</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-teal-600 text-xl mt-1"></i>
+                            <div class="text-xs sm:text-sm text-slate-700">
+                                <p class="font-extrabold text-slate-900">สถานที่ตั้งคลินิก:</p>
+                                <p>ชั้น 4 ตึกมรกต โรงพยาบาลสะเดา 110 ถ.ปาดังเบซาร์ ตำบลสะเดา อำเภอสะเดา จังหวัดสงขลา 90120</p>
+                                <a href="https://www.google.com/maps/place/%E0%B8%84%E0%B8%A5%E0%B8%B4%E0%B8%99%E0%B8%B4%E0%B8%81%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C%E0%B9%81%E0%B8%9C%E0%B8%99%E0%B9%84%E0%B8%97%E0%B8%A2%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%81%E0%B8%9E%E0%B8%97%E0%B8%A2%E0%B9%8C%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%A5%E0%B8%B7%E0%B8%AD%E0%B8%81+%E0%B9%82%E0%B8%A3%E0%B8%87%E0%B8%9E%E0%B8%A2%E0%B8%B2%E0%B8%9A%E0%B8%B2%E0%B8%A5%E0%B8%AA%E0%B8%B0%E0%B9%80%E0%B8%94%E0%B8%B2/@6.6357498,100.4044499,17z/data=!4m14!1m7!3m6!1s0x304cb96b33903ddb:0xeda426ad2da95321!2z4LiE4Lil4Li04LiZ4Li04LiB4LiB4Liy4Lij4LmB4Lie4LiX4Lii4LmM4LmB4Lic4LiZ4LmE4LiX4Lii4LmB4Lil4Liw4LiB4Liy4Lij4LmB4Lie4LiX4Lii4LmM4LiX4Liy4LiH4LmA4Lil4Li34Lit4LiBIOC5guC4o-C4h-C4nuC4ouC4suC4muC4suC4peC4quC4sOC5gOC4lOC4sg!8m2!3d6.6357498!4d100.4070248!16s%2Fg%2F11vc0zkhjv!3m5!1s0x304cb96b33903ddb:0xeda426ad2da95321!8m2!3d6.6357498!4d100.4070248!16s%2Fg%2F11vc0zkhjv?entry=ttu" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-teal-700 font-bold hover:underline mt-1.5">
+                                    <i class="fa-solid fa-map-location-dot"></i> เปิดแผนที่นำทางใน Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code + CTA Row -->
+                    <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <img src="https://lh3.googleusercontent.com/d/10Zwqj5OhJGNUq72Vqp3ww88GRijrRhJ8" alt="LINE QR Code" class="w-24 h-24 object-contain rounded-xl border border-slate-200 p-1 bg-white shadow-sm">
+                            <div>
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md">สแกนเพิ่มเพื่อน LINE</span>
+                                <p class="text-sm font-extrabold text-slate-800 mt-1">รับแจ้งเตือนคิว & สอบถามข้อมูล</p>
+                                <p class="text-xs text-slate-500">LINE ID: @649dqeft</p>
+                            </div>
+                        </div>
+                        <div class="w-full sm:w-auto flex flex-col gap-2">
+                            <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-2xl font-bold text-sm text-center shadow-md transition-all">
+                                <i class="fa-regular fa-calendar-check mr-1"></i> จองคิวออนไลน์
+                            </a>
+                            <a href="https://lin.ee/ti1KjcK" target="_blank" rel="noopener" class="bg-white hover:bg-slate-50 text-teal-800 border border-teal-600 px-6 py-2.5 rounded-2xl font-bold text-xs text-center transition-all">
+                                <i class="fa-brands fa-line text-[#06C755] mr-1"></i> แอดไลน์คลินิก
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Map Embed (5 cols) -->
+                <div class="lg:col-span-5 bg-white rounded-3xl overflow-hidden shadow-md border border-slate-100 min-h-[320px] flex flex-col">
+                    <iframe 
+                        title="แผนที่คลินิกการแพทย์แผนไทยและการแพทย์ทางเลือก โรงพยาบาลสะเดา"
+                        src="https://www.google.com/maps?q=6.6357498,100.4070248&hl=th&z=16&output=embed" 
+                        class="w-full flex-1 border-0 min-h-[300px]" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 10. FOOTER ==================== -->
+    <footer class="bg-gradient-to-b from-teal-950 to-slate-950 text-white py-10 border-t border-teal-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-teal-800/60">
+                <div class="flex items-center gap-3.5">
+                    <img src="https://lh3.googleusercontent.com/d/1sxp0wrhV7MKhr2_6nOLQsj-jVddMmnzR" alt="Sadao Wellness Logo" class="w-14 h-14 object-contain bg-white/95 p-1.5 rounded-2xl">
+                    <div>
+                        <h3 class="text-xl font-extrabold text-teal-300">Sadao Wellness</h3>
+                        <p class="text-sm font-semibold text-white">โรงพยาบาลสะเดา จังหวัดสงขลา</p>
+                        <p class="text-xs text-teal-200/80">กลุ่มงานการแพทย์แผนไทยและการแพทย์ทางเลือก</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-base sm:text-lg font-bold text-teal-200 italic">"สืบสานภูมิปัญญาไทย ผสานการแพทย์แผนจีน เพื่อสุขภาพที่สมดุล"</p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <a href="https://www.facebook.com/ttmsadao" target="_blank" rel="noopener" class="bg-[#1877F2] hover:bg-blue-700 text-white px-4 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 shadow transition-transform hover:scale-105">
+                        <i class="fa-brands fa-facebook text-base"></i> Facebook
+                    </a>
+                    <a href="https://lin.ee/ti1KjcK" target="_blank" rel="noopener" class="bg-[#06C755] hover:bg-green-600 text-white px-4 py-2.5 rounded-full text-xs font-bold flex items-center gap-2 shadow transition-transform hover:scale-105">
+                        <i class="fa-brands fa-line text-base"></i> LINE
+                    </a>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-2">
+                <p>&copy; 2026 Sadao Wellness | กลุ่มงานการแพทย์แผนไทยและการแพทย์ทางเลือก โรงพยาบาลสะเดา</p>
+                <p>ชั้น 4 ตึกมรกต รพ.สะเดา โทร. 08 4267 1735, 0 7437 9994 ต่อ 410</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MOBILE STICKY BOTTOM BAR ==================== -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 p-2.5 px-4 flex items-center gap-2.5 z-40 md:hidden shadow-[0_-4px_15px_rgba(0,0,0,0.06)]">
+        <a href="#calculator" class="bg-amber-50 text-amber-800 border border-amber-300 px-3.5 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shrink-0">
+            <i class="fa-solid fa-calculator text-amber-600"></i> คำนวณราคา
+        </a>
+        <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="flex-1 bg-gradient-to-r from-teal-600 to-emerald-600 text-white py-2.5 rounded-xl font-bold text-xs text-center shadow flex items-center justify-center gap-1.5">
+            <i class="fa-regular fa-calendar-check"></i> จองคิวออนไลน์
+        </a>
+        <a href="https://lin.ee/ti1KjcK" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-[#06C755] text-white flex items-center justify-center shrink-0 shadow">
+            <i class="fa-brands fa-line text-lg"></i>
+        </a>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // =========================================================
+        // 1. ข้อมูลบุคลากรประจำ 15 ท่าน (ใช้ลิงก์ Google Drive ทั้งหมด)
+        // =========================================================
+        const PERSONNEL = [
+            { id: 1, name: "นพ.ชัยวุฒิ สุขสมานวงศ์", nickname: "", role: "ผู้อำนวยการโรงพยาบาลสะเดา", subRole: "นายแพทย์เชี่ยวชาญ (ด้านเวชกรรมป้องกัน)", image: "https://lh3.googleusercontent.com/d/1sDk7oHN3nP06nc22UMo4oCDQksZPULZz", level: "director" },
+            { id: 2, name: "พท.ศุภชัย อุไร", nickname: "ชาย", role: "หัวหน้ากลุ่มงานการแพทย์แผนไทยฯ", subRole: "แพทย์แผนไทยชำนาญการ", image: "https://lh3.googleusercontent.com/d/1-DrmHUo3MZEvmQvFVsZI3BFQ5MsOL9L8", level: "head" },
+            { id: 3, name: "พท.ทศพร คงสุขนิรันดร์", nickname: "ปิง", role: "แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1EZwbmZ_jE5Fgxs1gMcM6r9FhidHelUMK", level: "doctor" },
+            { id: 4, name: "พจ.พรเพชร เพชรคงแก้ว", nickname: "บิ๋ม", role: "แพทย์แผนจีน", subRole: "", image: "https://lh3.googleusercontent.com/d/1oItV0Ncv4fIH2vcNubbq8Koj0rHI9W2e", level: "doctor" },
+            { id: 15, name: "พท.พนิตตา กีรติธราธร", nickname: "นุ่น", role: "แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1na7k9NjcPmJwhtJkO4u8wxPjl8k_q_WJ", level: "doctor" },
+            { id: 5, name: "คุณจินดา จันทร์หอม", nickname: "เจี๊ยบ", role: "พนักงานช่วยเหลือคนไข้", subRole: "", image: "https://lh3.googleusercontent.com/d/1tx7ASnH7vrvsXJx6zvOAJ6ErbDOubvlP", level: "support" },
+            { id: 6, name: "คุณเจนจิรา หมอราช", nickname: "เจน", role: "พนักงานบริการ", subRole: "", image: "https://lh3.googleusercontent.com/d/1lIi4ervUWRttbaqpMB40d2-RZy3xNLTu", level: "support" },
+            { id: 7, name: "คุณอทิตย์ติญา แดงนุ้ย", nickname: "ฟา", role: "ผช.แพทย์แผนจีน", subRole: "", image: "https://lh3.googleusercontent.com/d/13yJTMMAudfxO4AYTtlQXx2X8t02megcP", level: "support" },
+            { id: 8, name: "คุณรจนา จันเงิน", nickname: "แหม่ม", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1v_swIooxwM-_ocxM_CN5Cfhvan2djB6o", level: "assistant_thai" },
+            { id: 9, name: "คุณอรรถพล อั้นซ้าย", nickname: "บ่าว", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1Bi1GcjJGiWyLgnfv3hhsZ73hoYG9znV1", level: "assistant_thai" },
+            { id: 10, name: "คุณศินารัตน์ แซ่ตั้ง", nickname: "ซี", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/13ybdq-w5wNGi-w8cBmOZayCk5eC-bVNw", level: "assistant_thai" },
+            { id: 11, name: "คุณจุฑามาศ เว้นบาป", nickname: "ฝน", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1pGfm5S5dfNGXHRQW06k1vxjHJG_EDxvU", level: "assistant_thai" },
+            { id: 12, name: "คุณรัตน์ชนก พูลคุ้ม", nickname: "กวาง", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1ze9G8i9JGaXvKNy5a1kDy0d1j8aek3US", level: "assistant_thai" },
+            { id: 13, name: "คุณนิกษ์นิภา คงสุวรรณ์", nickname: "การ์ตูน", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1Pq0WvvRViLS9TG_tG88me7vovhLtzoia", level: "assistant_thai" },
+            { id: 14, name: "คุณณิชาภัทร ทองบริบูรณ์", nickname: "วาวา", role: "ผช.แพทย์แผนไทย", subRole: "", image: "https://lh3.googleusercontent.com/d/1PjB1Sd2KlbAw6pqCvFtTfRY_bJAmZJ5L", level: "assistant_thai" }
+        ];
+
+        function renderTeamDirectory() {
+            const container = document.getElementById('team-directory-container');
+            const fallbackLogo = "https://lh3.googleusercontent.com/d/1sxp0wrhV7MKhr2_6nOLQsj-jVddMmnzR";
+
+            const groups = [
+                { title: "คณะผู้บริหารและทีมแพทย์", subtitle: "บริหารงานและตรวจวินิจฉัยการรักษา", levels: ["director", "head", "doctor"] },
+                { title: "ทีมผู้ช่วยแพทย์แผนไทย แพทย์แผนจีน และบุคลากรสนับสนุน", subtitle: "ให้บริการหัตถการบำบัดและดูแลผู้รับบริการ", levels: ["assistant_thai", "support"] }
+            ];
+
+            let html = '';
+            groups.forEach(group => {
+                const members = PERSONNEL.filter(p => group.levels.includes(p.level));
+                html += `
+                <div>
+                    <div class="border-l-4 border-teal-600 pl-3.5 mb-6">
+                        <h3 class="text-lg sm:text-xl font-extrabold text-teal-950">${group.title}</h3>
+                        <p class="text-xs text-slate-500">${group.subtitle}</p>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+                `;
+
+                members.forEach(p => {
+                    const nick = p.nickname ? ` (${p.nickname})` : '';
+                    const sub = p.subRole ? `<p class="text-[11px] text-slate-500 mt-0.5">${p.subRole}</p>` : '';
+                    const isLeader = p.level === 'director' || p.level === 'head';
+                    const ringClass = isLeader ? 'ring-4 ring-amber-400/50 border-amber-500' : 'border-teal-100';
+
+                    html += `
+                        <div class="bg-slate-50/80 hover:bg-white rounded-3xl p-4 text-center border border-slate-200/70 shadow-sm card-hover flex flex-col items-center">
+                            <img src="${p.image}" alt="${p.name}" onerror="this.src='${fallbackLogo}'" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 ${ringClass} shadow-md mb-3 bg-white">
+                            <h4 class="font-extrabold text-xs sm:text-sm text-slate-800 leading-snug">${p.name}${nick}</h4>
+                            <p class="text-xs font-bold text-teal-700 mt-1">${p.role}</p>
+                            ${sub}
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // =========================================================
+        // 2. ระบบตะกร้าทดลองคำนวณราคาตามสิทธิ (Mix & Match Simulator)
+        // =========================================================
+        const RIGHT_NAMES = {
+            '1': 'บัตรทอง (ร่วมจ่าย 30 บาท)',
+            '2': 'บัตรทอง (ยกเว้นร่วมจ่าย)',
+            '3': 'ข้าราชการ / อปท. (เบิกจ่ายตรง)',
+            '4': 'รัฐวิสาหกิจ (สำรองจ่าย)',
+            '5': 'ประกันสังคม / ชำระเงินเอง'
+        };
+
+        const MAIN_SERVICES = [
+            { id: 'ttm_treat', name: 'นวดและประคบเพื่อการรักษา', dept: 'ttm', duration: 60, stdPrice: 250, icon: 'fa-hands-holding-circle' },
+            { id: 'ttm_relax', name: 'นวดตัวส่งเสริมสุขภาพ (ชำระเอง)', dept: 'ttm', duration: 60, stdPrice: 250, icon: 'fa-spa' },
+            { id: 'ttm_foot', name: 'นวดเท้าส่งเสริมสุขภาพ (ชำระเอง)', dept: 'ttm', duration: 60, stdPrice: 250, icon: 'fa-shoe-prints' },
+            { id: 'tcm_acu', name: 'ฝังเข็มเพื่อการรักษา', dept: 'tcm', duration: 60, stdPrice: 200, icon: 'fa-yin-yang' },
+            { id: 'tcm_cup', name: 'ครอบแก้ว (Cupping)', dept: 'tcm', duration: 30, stdPrice: 150, icon: 'fa-fire-burner' },
+            { id: 'tcm_face', name: 'ฝังเข็มใบหน้า', dept: 'tcm', duration: 30, stdPrice: 300, icon: 'fa-wand-sparkles' },
+            { id: 'tcm_ear', name: 'เม็ดผักกาดแปะหู', dept: 'tcm', duration: 15, stdPrice: 100, icon: 'fa-ear-listen' },
+            { id: 'steam_only', name: 'อบไอน้ำสมุนไพร (เดี่ยว)', dept: 'steam', duration: 45, stdPrice: 100, icon: 'fa-hot-tub-person' },
+            { id: 'postpartum', name: 'ดูแลมารดาหลังคลอด (2 ชม.)', dept: 'postpartum', duration: 120, stdPrice: 500, icon: 'fa-person-breastfeeding' },
+            { id: 'spa_60', name: 'สครับเกลือ / สปาผิว (โทรนัด)', dept: 'spa', duration: 60, stdPrice: 500, icon: 'fa-gem' }
+        ];
+
+        let calcState = {
+            right: '1',
+            timeMode: 'in', // 'in' หรือ 'out'
+            mainServiceId: 'ttm_treat',
+            addonSecondHour: 'none', // 'none', 'ttm_2hr', 'acu_2hr', 'cup_2hr'
+            addonSteam: false
+        };
+
+        // คำนวณราคาบริการหลักตามสิทธิ
+        function getMainServiceBasePrice(serviceId, right) {
+            switch (serviceId) {
+                case 'ttm_treat':
+                    if (right === '3') return 0;
+                    if (right === '1' || right === '2') return 100;
+                    return 250;
+                case 'ttm_relax':
+                case 'ttm_foot':
+                    return 250;
+                case 'tcm_acu':
+                    return (right === '3') ? 0 : 200;
+                case 'tcm_cup':
+                    return 150;
+                case 'tcm_face':
+                    return 300;
+                case 'tcm_ear':
+                    return 100;
+                case 'steam_only':
+                    if (right === '2' || right === '3') return 0;
+                    if (right === '1') return 30;
+                    if (right === '4') return 120;
+                    return 100;
+                case 'postpartum':
+                    if (right === '2' || right === '3') return 0;
+                    if (right === '1') return 30;
+                    if (right === '4') return 670;
+                    return 500;
+                case 'spa_60':
+                    return 500;
+                default:
+                    return 0;
+            }
+        }
+
+        // คำนวณค่านอกเวลาราชการ (+60 บาท)
+        function getOutOfHoursFee(serviceId, right, timeMode) {
+            if (timeMode !== 'out') return 0;
+            // ยกเว้นนวดและประคบเพื่อการรักษา สิทธิบัตรทอง (1, 2) ที่ในเวลาและนอกเวลาเท่ากัน 100 บาท
+            if (serviceId === 'ttm_treat' && (right === '1' || right === '2')) return 0;
+            // บริการหลังคลอด และ สปาผิว ไม่มีค่านอกเวลาในระบบ
+            if (serviceId === 'postpartum' || serviceId === 'spa_60') return 0;
+            return 60;
+        }
+
+        function renderMainServicesSelector() {
+            const container = document.getElementById('calc-main-service-list');
+            let html = '';
+            MAIN_SERVICES.forEach(svc => {
+                const price = getMainServiceBasePrice(svc.id, calcState.right);
+                const isSelected = calcState.mainServiceId === svc.id;
+                const activeCls = isSelected
+                    ? 'border-teal-600 bg-teal-50/90 ring-2 ring-teal-500/20'
+                    : 'border-slate-200 hover:border-teal-300 bg-white';
+
+                html += `
+                    <button type="button" onclick="setCalcMainService('${svc.id}')" class="border-2 ${activeCls} p-3 rounded-2xl text-left flex items-center justify-between transition-all">
+                        <div class="flex items-center gap-2.5 min-w-0 pr-2">
+                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-600'} flex items-center justify-center shrink-0 text-xs">
+                                <i class="fa-solid ${svc.icon}"></i>
+                            </div>
+                            <span class="font-bold text-xs text-slate-800 truncate">${svc.name}</span>
+                        </div>
+                        <span class="text-xs font-extrabold ${price === 0 ? 'text-emerald-600' : 'text-teal-800'} shrink-0">
+                            ${price === 0 ? 'ฟรี 0.-' : price + '.-'}
+                        </span>
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function setCalcRight(rightVal) {
+            calcState.right = rightVal;
+            document.querySelectorAll('.calc-right-btn').forEach(btn => {
+                const isMatch = btn.getAttribute('data-right') === rightVal;
+                btn.className = isMatch
+                    ? `calc-right-btn ${rightVal === '5' ? 'sm:col-span-2' : ''} border-2 border-teal-600 bg-teal-50 p-3 rounded-2xl text-left flex items-center gap-3 transition-all shadow-sm`
+                    : `calc-right-btn ${btn.getAttribute('data-right') === '5' ? 'sm:col-span-2' : ''} border-2 border-slate-200 hover:border-teal-300 bg-white p-3 rounded-2xl text-left flex items-center gap-3 transition-all`;
+            });
+            updateCalculatorUI();
+        }
+
+        function setCalcTimeMode(mode) {
+            calcState.timeMode = mode;
+            const btnIn = document.getElementById('time-btn-in');
+            const btnOut = document.getElementById('time-btn-out');
+            if (mode === 'in') {
+                btnIn.className = 'border-2 border-teal-600 bg-teal-50 p-3 rounded-2xl text-center transition-all shadow-sm';
+                btnOut.className = 'border-2 border-slate-200 bg-white p-3 rounded-2xl text-center transition-all';
+            } else {
+                btnOut.className = 'border-2 border-amber-500 bg-amber-50 p-3 rounded-2xl text-center transition-all shadow-sm';
+                btnIn.className = 'border-2 border-slate-200 bg-white p-3 rounded-2xl text-center transition-all';
+            }
+            updateCalculatorUI();
+        }
+
+        function setCalcMainService(serviceId) {
+            calcState.mainServiceId = serviceId;
+            // หากเลือกหลังคลอด หรือ อบไอน้ำเดี่ยว หรือ สปา ให้ปิด Addon ชั่วโมงที่ 2 อัตโนมัติเพื่อความสมจริง
+            if (serviceId === 'postpartum' || serviceId === 'steam_only' || serviceId === 'spa_60') {
+                calcState.addonSecondHour = 'none';
+                calcState.addonSteam = false;
+                document.getElementById('calc-steam-toggle').checked = false;
+            }
+            updateCalculatorUI();
+        }
+
+        function setCalcAddon(addonId) {
+            calcState.addonSecondHour = addonId;
+            document.querySelectorAll('.calc-addon-btn').forEach(btn => {
+                const isMatch = btn.getAttribute('data-addon') === addonId;
+                btn.className = isMatch
+                    ? 'calc-addon-btn border-2 border-teal-600 bg-teal-50/70 p-2.5 rounded-xl text-left text-xs font-bold flex items-center justify-between shadow-sm'
+                    : 'calc-addon-btn border-2 border-slate-200 bg-white p-2.5 rounded-xl text-left text-xs font-bold flex items-center justify-between';
+            });
+            updateCalculatorUI();
+        }
+
+        function toggleCalcSteam() {
+            calcState.addonSteam = document.getElementById('calc-steam-toggle').checked;
+            updateCalculatorUI();
+        }
+
+        function resetCalculator() {
+            calcState = { right: '1', timeMode: 'in', mainServiceId: 'ttm_treat', addonSecondHour: 'none', addonSteam: false };
+            document.getElementById('calc-steam-toggle').checked = false;
+            setCalcRight('1');
+            setCalcTimeMode('in');
+            setCalcAddon('none');
+        }
+
+        function updateCalculatorUI() {
+            renderMainServicesSelector();
+
+            const mainSvc = MAIN_SERVICES.find(s => s.id === calcState.mainServiceId);
+            const r = calcState.right;
+            const basePrice = getMainServiceBasePrice(mainSvc.id, r);
+            const oohFee = getOutOfHoursFee(mainSvc.id, r, calcState.timeMode);
+
+            // ซ่อน/แสดงส่วน Addon หากบริการหลักเป็นหลังคลอดหรืออบสมุนไพรเดี่ยว
+            const addonSec = document.getElementById('calc-addon-section');
+            if (mainSvc.id === 'postpartum' || mainSvc.id === 'steam_only' || mainSvc.id === 'spa_60') {
+                addonSec.classList.add('opacity-50', 'pointer-events-none');
+            } else {
+                addonSec.classList.remove('opacity-50', 'pointer-events-none');
+            }
+
+            // คำนวณราคาชั่วโมงที่ 2
+            let addonPrice = 0;
+            let addonLabel = '';
+            let addonDuration = 0;
+            if (calcState.addonSecondHour === 'ttm_2hr') {
+                addonPrice = 250; addonLabel = 'บริการต่อเนื่อง: นวดแผนไทย ชม.ที่ 2'; addonDuration = 60;
+            } else if (calcState.addonSecondHour === 'acu_2hr') {
+                addonPrice = 200; addonLabel = 'บริการต่อเนื่อง: ฝังเข็มเพื่อการรักษา'; addonDuration = 60;
+            } else if (calcState.addonSecondHour === 'cup_2hr') {
+                addonPrice = 150; addonLabel = 'บริการต่อเนื่อง: ครอบแก้ว'; addonDuration = 30;
+            }
+
+            // คำนวณราคาอบไอน้ำต่อเนื่อง
+            const steamFee = (r === '4' || r === '5') ? 100 : 0;
+            document.getElementById('calc-steam-addon-desc').innerText = steamFee === 0
+                ? 'สิทธิของคุณ: อบไอน้ำต่อเนื่อง ฟรี 0 บาท!'
+                : 'สิทธิของคุณ: ชำระเพิ่ม 100 บาท';
+
+            let activeSteamFee = 0;
+            let steamDuration = 0;
+            if (calcState.addonSteam) {
+                activeSteamFee = steamFee;
+                steamDuration = 30;
+            }
+
+            // อัปเดตใบเสร็จ
+            document.getElementById('receipt-right-name').innerText = RIGHT_NAMES[r];
+            document.getElementById('receipt-time-name').innerText = calcState.timeMode === 'in'
+                ? 'ในเวลาราชการ (08:00–16:00 น.)'
+                : 'นอกเวลา / เสาร์ / วันหยุด (+60.-)';
+
+            let itemsHtml = `
+                <div class="flex justify-between items-center text-xs sm:text-sm">
+                    <span class="font-bold text-slate-800"><i class="fa-solid fa-circle-check text-teal-600 mr-1.5"></i> ${mainSvc.name}</span>
+                    <span class="font-extrabold text-slate-900">${basePrice} บาท</span>
+                </div>
+            `;
+
+            if (calcState.addonSecondHour !== 'none') {
+                itemsHtml += `
+                    <div class="flex justify-between items-center text-xs sm:text-sm text-emerald-700">
+                        <span class="font-bold"><i class="fa-solid fa-plus-circle mr-1.5"></i> ${addonLabel}</span>
+                        <span class="font-extrabold">+${addonPrice} บาท</span>
+                    </div>
+                `;
+            }
+
+            if (calcState.addonSteam) {
+                itemsHtml += `
+                    <div class="flex justify-between items-center text-xs sm:text-sm text-sky-700">
+                        <span class="font-bold"><i class="fa-solid fa-hot-tub-person mr-1.5"></i> อบไอน้ำสมุนไพรต่อเนื่อง</span>
+                        <span class="font-extrabold">${activeSteamFee === 0 ? 'ฟรี 0 บาท' : '+' + activeSteamFee + ' บาท'}</span>
+                    </div>
+                `;
+            }
+
+            if (oohFee > 0) {
+                itemsHtml += `
+                    <div class="flex justify-between items-center text-xs sm:text-sm text-amber-700">
+                        <span class="font-bold"><i class="fa-regular fa-clock mr-1.5"></i> ค่าบริการนอกเวลาราชการ</span>
+                        <span class="font-extrabold">+${oohFee} บาท</span>
+                    </div>
+                `;
+            }
+
+            document.getElementById('receipt-items-list').innerHTML = itemsHtml;
+
+            // คำนวณส่วนลดที่ประหยัดได้เทียบกับเรตชำระเงินเอง
+            const stdBase = mainSvc.stdPrice;
+            const stdSteam = calcState.addonSteam ? 100 : 0;
+            const savedAmount = Math.max(0, (stdBase - basePrice) + (stdSteam - activeSteamFee));
+            const savingBox = document.getElementById('receipt-saving-box');
+            if (savedAmount > 0) {
+                savingBox.classList.remove('hidden');
+                document.getElementById('receipt-saving-amount').innerText = `${savedAmount} บาท`;
+            } else {
+                savingBox.classList.add('hidden');
+            }
+
+            // รวมยอดสุทธิ
+            const total = basePrice + addonPrice + activeSteamFee + oohFee;
+            const totalDuration = mainSvc.duration + addonDuration + steamDuration;
+            document.getElementById('receipt-total-price').innerText = `${total}.-`;
+            document.getElementById('receipt-duration-text').innerText = `เวลารับบริการรวมประมาณ ${totalDuration} นาที`;
+
+            // แจ้งเตือนเงื่อนไขเวลาทำการ
+            const warnEl = document.getElementById('receipt-warning-msg');
+            if (mainSvc.id === 'postpartum' && calcState.timeMode === 'out') {
+                warnEl.classList.remove('hidden');
+                warnEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> บริการดูแลมารดาหลังคลอด เปิดให้บริการเฉพาะในเวลาราชการ (จันทร์–ศุกร์ 08:00–16:00 น.) เท่านั้น';
+            } else if (mainSvc.dept === 'tcm' && calcState.timeMode === 'out') {
+                warnEl.classList.remove('hidden');
+                warnEl.innerHTML = '<i class="fa-solid fa-circle-info mr-1"></i> แพทย์แผนจีน นอกเวลาราชการ (16:30–20:00 น.) เปิดเฉพาะวันอังคาร และ วันพฤหัสบดี';
+            } else {
+                warnEl.classList.add('hidden');
+            }
+
+            // เปลี่ยนปุ่ม Action หากเลือกสปาผิว
+            const actionArea = document.getElementById('receipt-action-area');
+            if (mainSvc.id === 'spa_60') {
+                actionArea.innerHTML = `
+                    <a href="tel:0842671735" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-4 rounded-2xl font-extrabold text-base shadow-lg transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-phone-volume"></i> โทรนัดหมายสปา 08 4267 1735
+                    </a>
+                `;
+            } else {
+                actionArea.innerHTML = `
+                    <a href="https://ttmsadao.github.io/ttmed-sadao-queue/" class="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white py-4 rounded-2xl font-extrabold text-base shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-calendar-check"></i> ไปหน้าจองคิวออนไลน์ทันที <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                `;
+            }
+        }
+
+        // ฟังก์ชันเมื่อกดเลือกแพ็กเกจแนะนำด้านบน
+        function applyPresetPackage(presetKey) {
+            if (presetKey === 'ttm_2hr') {
+                calcState.mainServiceId = 'ttm_treat';
+                setCalcAddon('ttm_2hr');
+                calcState.addonSteam = false;
+                document.getElementById('calc-steam-toggle').checked = false;
+            } else if (presetKey === 'ttm_acupuncture') {
+                calcState.mainServiceId = 'ttm_treat';
+                setCalcAddon('acu_2hr');
+                calcState.addonSteam = false;
+                document.getElementById('calc-steam-toggle').checked = false;
+            } else if (presetKey === 'ttm_steam') {
+                calcState.mainServiceId = 'ttm_treat';
+                setCalcAddon('none');
+                calcState.addonSteam = true;
+                document.getElementById('calc-steam-toggle').checked = true;
+            } else if (presetKey === 'postpartum_full') {
+                calcState.mainServiceId = 'postpartum';
+                calcState.timeMode = 'in';
+                setCalcTimeMode('in');
+                setCalcAddon('none');
+                calcState.addonSteam = false;
+                document.getElementById('calc-steam-toggle').checked = false;
+            }
+            updateCalculatorUI();
+            document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ฟังก์ชันเมื่อกดปุ่ม "ลองคำนวณราคา" จากการ์ดบริการทั้ง 10 ใบ
+        function pickServiceToCart(serviceId) {
+            setCalcMainService(serviceId);
+            document.getElementById('calculator').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // =========================================================
+        // 3. ระบบกรองหมวดหมู่การ์ดบริการ & เมนูมือถือ
+        // =========================================================
+        function filterServiceCards(category, btnEl) {
+            document.querySelectorAll('.svc-filter-btn').forEach(b => {
+                b.className = 'svc-filter-btn bg-slate-100 hover:bg-teal-50 text-slate-700 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all';
+            });
+            if (btnEl) {
+                btnEl.className = 'svc-filter-btn active bg-teal-700 text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all';
+            }
+
+            document.querySelectorAll('.service-item-card').forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function filterAndScroll(category) {
+            const targetBtn = document.querySelector(`.svc-filter-btn[onclick*="'${category}'"]`);
+            filterServiceCards(category, targetBtn);
+            document.getElementById('services').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            menu.classList.toggle('hidden');
+            icon.className = menu.classList.contains('hidden') ? 'fa-solid fa-bars text-xl' : 'fa-solid fa-xmark text-xl';
+        }
+
+        // เริ่มต้นทำงานเมื่อโหลดหน้าเว็บเสร็จ
+        window.addEventListener('DOMContentLoaded', () => {
+            renderTeamDirectory();
+            updateCalculatorUI();
+        });
+    </script>
+</body>
+</html>
